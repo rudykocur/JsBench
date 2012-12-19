@@ -2,21 +2,6 @@
 
 class Oesk extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
 	public function index()
 	{
             $this->load->view('header');
@@ -33,8 +18,30 @@ class Oesk extends CI_Controller {
         
         public function results()
 	{
+            $this->load->model('ResultModel');
+            $results = $this->ResultModel->getResults();
+            
+            $runId = $this->input->get('runId');
+            
+            if($runId) {
+                $runData = $this->ResultModel->getUserResult($runId);
+                
+                foreach($runData as $runType => $runRow) {
+                    $results['categories'][$runType][] = 'Twój wynik';
+                    $results['data'][$runType]['data'][] = array(
+                        'y' => floatval($runRow['duration']),
+                        'color' => '#FF0000'
+                    );
+                }
+            }
+            
+            $htmlData = array(
+                'categories' => json_encode($results['categories']),
+                'data' => json_encode($results['data']),
+            );
+            
             $this->load->view('header');
-            $this->load->view('oesk_results');
+            $this->load->view('oesk_results', $htmlData);
             $this->load->view('footer');
 	}
         
@@ -51,19 +58,16 @@ class Oesk extends CI_Controller {
         }
         
         public function post_result() {
-            $results = $this->input->post('results');
+            $resultsStr = $this->input->post('results');
             $browser = $this->input->post('browser');
             $platform = $this->input->post('platform');
             
-            error_log('AAAAA CALLED ' . $results);
-            
-            $results = json_decode($results, true);
-            error_log('DECODED ' . print_r($results, true));
+            $results = json_decode($resultsStr, true);
             
             $this->load->model('ResultModel');
             $runId = $this->ResultModel->record_results($browser, $platform, $results);
             
-            echo $runId;
+            echo json_encode(array('runId' => $runId));
         }
 }
 

@@ -49,7 +49,7 @@
         
         function next() {
             var curTest = toRun[0];
-            console.log('running', curTest);
+//            console.log('running', curTest);
             
             $('testSuiteName').innerHTML = curTest.name;
             
@@ -65,7 +65,7 @@
         }
         
         function onTestStart(steps) {
-            console.log('WILL RUN', steps, 'STEPS');
+//            console.log('WILL RUN', steps, 'STEPS');
             curTestStart = new Date();
             currentTestSteps = steps;
             currentTestStep = 0;
@@ -79,7 +79,7 @@
             
             $('testNumber').innerHTML = currentTestStep;
             
-            console.log('STEP '+currentTestStep+'/'+currentTestSteps);
+//            console.log('STEP '+currentTestStep+'/'+currentTestSteps);
         }
         
         function onTestComplete() {
@@ -91,14 +91,14 @@
             results.push(curTest);
             
             
-            console.log('CURRENT TEST COMPLETED !!', (curTestEnd - curTestStart));
+//            console.log('CURRENT TEST COMPLETED !!', (curTestEnd - curTestStart));
             toRun.splice(0,1);
             if(toRun.length > 0) {
-                console.log('MOAR TO GO');
+//                console.log('MOAR TO GO');
                 next();
             }
             else {
-                console.log('ALL DONE', results);
+//                console.log('ALL DONE', results);
                 
                 $('testSuiteName').innerHTML = '';
                 $('testNumber').innerHTML = '';
@@ -106,7 +106,6 @@
                 
                 var toSend = results.map(function(row) {return {name:row.name, time:row.time}}); 
                 
-                console.log('ASDZXC', toSend);
                 
                 new Request({
                     url: '<?php echo site_url("oesk/post_result") ?>',
@@ -116,7 +115,10 @@
                         browser: Browser.name + ' ' + Browser.version
                     },
                     onSuccess: function(responseText) {
-                        console.log('AAAA', responseText);
+                        var result = JSON.decode(responseText);
+                        var resultUrl = '<?php echo site_url("oesk/results") ?>?runId='+result['runId'];
+                        
+                        window.location = resultUrl;
                     }
                 }).send();
             }

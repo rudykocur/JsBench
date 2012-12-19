@@ -3,12 +3,6 @@
 <?php echo oesk_nav('test') ?>
 
 <div id="body">
-    Run yo' horses!
-    
-    <!--
-    <script src="http://www.numericjs.com/lib/numeric-1.2.4.js"></script>
-    -->
-    
     <script>
         
         

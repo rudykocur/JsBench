@@ -160,8 +160,6 @@
 <?php echo oesk_nav('results') ?>
 
 <div id="body">
-    Wyniki dać panowie!
-    
     <div id="chartContainerKraken" style="min-width: 400px; height: 500px; margin: 0 auto"></div>
     
     <div id="chartContainerSunspider" style="min-width: 400px; height: 500px; margin: 0 auto"></div>

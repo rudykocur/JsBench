@@ -3,14 +3,12 @@
         <script src="<?php echo base_url()?>assets/benchmarks/v8-base.js"></script>
         <script src="<?php echo base_url()?>assets/benchmarks/v8-richards.js"></script>
         <script src="<?php echo base_url()?>assets/benchmarks/v8-deltablue.js"></script>
-        <!--
         <script src="<?php echo base_url()?>assets/benchmarks/v8-crypto.js"></script>
         <script src="<?php echo base_url()?>assets/benchmarks/v8-raytrace.js"></script>
         <script src="<?php echo base_url()?>assets/benchmarks/v8-earley-boyer.js"></script>
         <script src="<?php echo base_url()?>assets/benchmarks/v8-regexp.js"></script>
         <script src="<?php echo base_url()?>assets/benchmarks/v8-splay.js"></script>
         <script src="<?php echo base_url()?>assets/benchmarks/v8-navier-stokes.js"></script>
-        -->
     </head>
     
     <body onload="start()">

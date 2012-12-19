@@ -121,7 +121,8 @@
         
     </script>
     
-    <a id="btn_run" href="javascript:start()">Uruchom testy</a>
+    <a id="btn_run" href="javascript:start()">Uruchom testy</a><br/>
+    Uwaga! Testy mogą trwać długo, musi się załadować cały zbiór testów. Proszę o cierpliwość.
     
     <div id="testframeparent"></div>
     

@@ -63,7 +63,6 @@ function recordResult(time)
 
 function finish()
 {
-    console.log('OMG', output);
     
     if(window.parent) {
         window.parent.onTestComplete();
